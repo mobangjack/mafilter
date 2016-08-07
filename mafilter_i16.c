@@ -18,7 +18,7 @@
 /*        Moving Average Filter         */
 /****************************************/
 
-#include "MAFilterI16.h"
+#include "mafilter_i16.h"
 
 void MAFilterI16_Init(MAFilterI16* mafilter, Typedef* buf, uint32_t len)
 {
@@ -35,7 +35,7 @@ MAFilterI16* MAFilterI16_Create(uint32_t len)
 	MAFilterI16* mafilter = (MAFilterI16*)malloc(sizeof(MAFilterI16));
 	if(mafilter == NULL) return NULL;
 	mafilter->buf = (Typedef*)malloc(sizeof(Typedef)*len);
-	if(mafilter->buf == NULL) {free(mafilter); return NULL}
+	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
 	mafilter->len = len;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
@@ -47,7 +47,7 @@ MAFilterI16* MAFilterI16_Create(uint32_t len)
 Typedef MAFilterI16_Calc(MAFilterI16* mafilter, Typedef v)
 {
 	mafilter->det = v - mafilter->buf[mafilter->ptr];
-	mafilter->sum += det;
+	mafilter->sum += mafilter->det;
 	mafilter->out = mafilter->sum / mafilter->len;
 	mafilter->buf[mafilter->ptr++] = v;
 	return mafilter->out;

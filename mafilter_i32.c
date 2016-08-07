@@ -18,7 +18,7 @@
 /*        Moving Average Filter         */
 /****************************************/
 
-#include "MAFilterI32.h"
+#include "mafilter_i32.h"
 
 void MAFilterI32_Init(MAFilterI32* mafilter, Typedef* buf, uint32_t len)
 {
@@ -35,7 +35,7 @@ MAFilterI32* MAFilterI32_Create(uint32_t len)
 	MAFilterI32* mafilter = (MAFilterI32*)malloc(sizeof(MAFilterI32));
 	if(mafilter == NULL) return NULL;
 	mafilter->buf = (Typedef*)malloc(sizeof(Typedef)*len);
-	if(mafilter->buf == NULL) {free(mafilter); return NULL}
+	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
 	mafilter->len = len;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
@@ -47,7 +47,7 @@ MAFilterI32* MAFilterI32_Create(uint32_t len)
 Typedef MAFilterI32_Calc(MAFilterI32* mafilter, Typedef v)
 {
 	mafilter->det = v - mafilter->buf[mafilter->ptr];
-	mafilter->sum += det;
+	mafilter->sum += mafilter->det;
 	mafilter->out = mafilter->sum / mafilter->len;
 	mafilter->buf[mafilter->ptr++] = v;
 	return mafilter->out;

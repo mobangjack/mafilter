@@ -26,7 +26,9 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-
+#include <stdlib.h>
+#include <string.h>
+	
 typedef int16_t Typedef;
 
 typedef struct
@@ -37,12 +39,12 @@ typedef struct
 	uint32_t ptr;
 	Typedef sum;
 	Typedef out;
-}MAFilterI32;
+}MAFilterI16;
 
-void MAFilterI32_Init(MAFilterI32* mafilter, Typedef* buf, uint32_t len);
-MAFilterI32* MAFilterI32_Create(uint32_t len);
-Typedef MAFilterI32_Calc(MAFilterI32* mafilter, Typedef v);
-void MAFilterI32_Reset(MAFilterI32* mafilter);
+void MAFilterI16_Init(MAFilterI16* mafilter, Typedef* buf, uint32_t len);
+MAFilterI16* MAFilterI16_Create(uint32_t len);
+Typedef MAFilterI16_Calc(MAFilterI16* mafilter, Typedef v);
+void MAFilterI16_Reset(MAFilterI16* mafilter);
 
 #ifdef __cpluplus
 }
