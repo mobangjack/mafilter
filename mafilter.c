@@ -51,6 +51,7 @@ Typedef MAFilter_Calc(MAFilter* mafilter, Typedef v)
 	mafilter->sum += mafilter->det;
 	mafilter->out = mafilter->sum / mafilter->len;
 	mafilter->buf[mafilter->ptr++] = v;
+	if(mafilter->ptr == mafilter->len) mafilter->ptr = 0;
 	return mafilter->out;
 }
 

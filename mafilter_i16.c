@@ -51,6 +51,7 @@ int16_t MAFilterI16_Calc(MAFilterI16* mafilter, int16_t v)
 	mafilter->sum += mafilter->det;
 	mafilter->out = mafilter->sum / mafilter->len;
 	mafilter->buf[mafilter->ptr++] = v;
+	if(mafilter->ptr == mafilter->len) mafilter->ptr = 0;
 	return mafilter->out;
 }
 
