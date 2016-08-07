@@ -29,21 +29,19 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 	
-typedef int16_t Typedef;
-
 typedef struct
 {
-	Typedef* buf;
+	int32_t* buf;
 	uint32_t len;
-	Typedef det;
+	int32_t det;
 	uint32_t ptr;
-	Typedef sum;
-	Typedef out;
+	int32_t sum;
+	int32_t out;
 }MAFilterI32;
 
-void MAFilterI32_Init(MAFilterI32* mafilter, Typedef* buf, uint32_t len);
+void MAFilterI32_Init(MAFilterI32* mafilter, int32_t* buf, uint32_t len);
 MAFilterI32* MAFilterI32_Create(uint32_t len);
-Typedef MAFilterI32_Calc(MAFilterI32* mafilter, Typedef v);
+int32_t MAFilterI32_Calc(MAFilterI32* mafilter, int32_t v);
 void MAFilterI32_Reset(MAFilterI32* mafilter);
 
 #ifdef __cpluplus

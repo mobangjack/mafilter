@@ -29,21 +29,19 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 	
-typedef float Typedef;
-
 typedef struct
 {
-	Typedef* buf;
+	float* buf;
 	uint32_t len;
-	Typedef det;
+	float det;
 	uint32_t ptr;
-	Typedef sum;
-	Typedef out;
+	float sum;
+	float out;
 }MAFilterF32;
 
-void MAFilterF32_Init(MAFilterF32* mafilter, Typedef* buf, uint32_t len);
+void MAFilterF32_Init(MAFilterF32* mafilter, float* buf, uint32_t len);
 MAFilterF32* MAFilterF32_Create(uint32_t len);
-Typedef MAFilterF32_Calc(MAFilterF32* mafilter, Typedef v);
+float MAFilterF32_Calc(MAFilterF32* mafilter, float v);
 void MAFilterF32_Reset(MAFilterF32* mafilter);
 
 #ifdef __cpluplus

@@ -20,7 +20,7 @@
 
 #include "mafilter_f32.h"
 
-void MAFilterF32_Init(MAFilterF32* mafilter, Typedef* buf, uint32_t len)
+void MAFilterF32_Init(MAFilterF32* mafilter, float* buf, uint32_t len)
 {
 	mafilter->buf = buf;
 	mafilter->len = len;
@@ -34,8 +34,9 @@ MAFilterF32* MAFilterF32_Create(uint32_t len)
 {
 	MAFilterF32* mafilter = (MAFilterF32*)malloc(sizeof(MAFilterF32));
 	if(mafilter == NULL) return NULL;
-	mafilter->buf = (Typedef*)malloc(sizeof(Typedef)*len);
+	mafilter->buf = (float*)malloc(sizeof(float)*len);
 	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
+	memset(mafilter->buf, 0, sizeof(*mafilter->buf)*len);
 	mafilter->len = len;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
@@ -44,7 +45,7 @@ MAFilterF32* MAFilterF32_Create(uint32_t len)
 	return mafilter;
 }
 
-Typedef MAFilterF32_Calc(MAFilterF32* mafilter, Typedef v)
+float MAFilterF32_Calc(MAFilterF32* mafilter, float v)
 {
 	mafilter->det = v - mafilter->buf[mafilter->ptr];
 	mafilter->sum += mafilter->det;
@@ -55,7 +56,7 @@ Typedef MAFilterF32_Calc(MAFilterF32* mafilter, Typedef v)
 
 void MAFilterF32_Reset(MAFilterF32* mafilter)
 {
-	memset(mafilter->buf, 0, sizeof(Typedef)*mafilter->len);
+	memset(mafilter->buf, 0, sizeof(float)*mafilter->len);
 	mafilter->ptr = 0;
 	mafilter->sum = 0;
 	mafilter->out = 0;

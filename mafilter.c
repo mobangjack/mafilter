@@ -36,6 +36,7 @@ MAFilter* MAFilter_Create(uint32_t len)
 	if(mafilter == NULL) return NULL;
 	mafilter->buf = (Typedef*)malloc(sizeof(Typedef)*len);
 	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
+	memset(mafilter->buf, 0, sizeof(*mafilter->buf)*len);
 	mafilter->len = len;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
