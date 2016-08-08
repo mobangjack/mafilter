@@ -36,8 +36,9 @@ MAFilterI16* MAFilterI16_Create(uint32_t len)
 	if(mafilter == NULL) return NULL;
 	mafilter->buf = (int16_t*)malloc(sizeof(int16_t)*len);
 	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
-	memset(mafilter->buf, 0, sizeof(*mafilter->buf)*len);
 	mafilter->len = len;
+	for(mafilter->ptr = 0; mafilter->ptr < mafilter->len; mafilter->ptr++)
+		mafilter->buf[mafilter->ptr] = 0;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
 	mafilter->sum = 0;
@@ -57,7 +58,8 @@ int16_t MAFilterI16_Calc(MAFilterI16* mafilter, int16_t v)
 
 void MAFilterI16_Reset(MAFilterI16* mafilter)
 {
-	memset(mafilter->buf, 0, sizeof(int16_t)*mafilter->len);
+	for(mafilter->ptr = 0; mafilter->ptr < mafilter->len; mafilter->ptr++)
+		mafilter->buf[mafilter->ptr] = 0;
 	mafilter->ptr = 0;
 	mafilter->sum = 0;
 	mafilter->out = 0;

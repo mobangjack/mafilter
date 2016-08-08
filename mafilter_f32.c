@@ -36,8 +36,9 @@ MAFilterF32* MAFilterF32_Create(uint32_t len)
 	if(mafilter == NULL) return NULL;
 	mafilter->buf = (float*)malloc(sizeof(float)*len);
 	if(mafilter->buf == NULL) {free(mafilter); return NULL;}
-	memset(mafilter->buf, 0, sizeof(*mafilter->buf)*len);
 	mafilter->len = len;
+	for(mafilter->ptr = 0; mafilter->ptr < mafilter->len; mafilter->ptr++)
+		mafilter->buf[mafilter->ptr] = 0;
 	mafilter->det = 0;
 	mafilter->ptr = 0;
 	mafilter->sum = 0;
@@ -57,7 +58,8 @@ float MAFilterF32_Calc(MAFilterF32* mafilter, float v)
 
 void MAFilterF32_Reset(MAFilterF32* mafilter)
 {
-	memset(mafilter->buf, 0, sizeof(float)*mafilter->len);
+	for(mafilter->ptr = 0; mafilter->ptr < mafilter->len; mafilter->ptr++)
+		mafilter->buf[mafilter->ptr] = 0;
 	mafilter->ptr = 0;
 	mafilter->sum = 0;
 	mafilter->out = 0;
